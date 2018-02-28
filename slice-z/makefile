@@ -1,4 +1,3 @@
-# Switching run only went up to 37 timesteps
 TIMESTEPS=$(shell echo {00..50})
 MONTAGE_OUTPUT=$(addsuffix .png,$(addprefix montage/,$(TIMESTEPS)))
 
