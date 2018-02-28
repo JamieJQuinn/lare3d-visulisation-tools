@@ -1,14 +1,9 @@
 # ADD DIRECTORIES TO HERE
 DIRS=slice-z slice-y energy-plots kdes
 
-.PHONY: all $(DIRS)
-all: $(DIRS)
+.PHONY: all clean
 
-$(DIRS):
-	$(MAKE) -C $@
-
-.PHONY: clean clean-$(DIRS)
-clean: clean-$(DIRS)
-
-clean-$(DIRS):
-	$(MAKE) clean -C $@
+all clean:
+	for dir in $(DIRS); do\
+		$(MAKE) -C $$dir $@;\
+	done
