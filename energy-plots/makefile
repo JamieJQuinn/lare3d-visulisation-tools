@@ -14,4 +14,4 @@ both.png:
 	python print_energy.py $(ISOTROPIC-DIR)/Data/en.dat $(SWITCHING-DIR)/Data/en.dat --plot_all --save --output $@
 
 clean:
-	rm $(OUTPUTS)
+	rm -f $(OUTPUTS)
