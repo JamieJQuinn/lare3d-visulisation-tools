@@ -17,7 +17,7 @@ SWITCHING_DIR=${SWITCHING_DIR//\//\\/}
 
 echo "Copying to ${OUTPUT_DIR}"
 
-cp -rv ${SCRIPT_DIR} ${OUTPUT_DIR}
+cp -rTv ${SCRIPT_DIR} ${OUTPUT_DIR}
 cd ${OUTPUT_DIR}
 
 sed -i "s/SWITCHING_DIR=.*$/SWITCHING_DIR=${SWITCHING_DIR}/" ./makefile
