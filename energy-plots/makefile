@@ -1,6 +1,4 @@
 OUTPUTS=switching.png isotropic.png both.png
-SWITCHING_DIR=/nas/1101974q/kink-instability-str8/mid-res/without-rampdown/v-4r-4-switching
-ISOTROPIC_DIR=/nas/1101974q/kink-instability-str8/mid-res/without-rampdown/v-4r-4-isotropic
 
 all: $(OUTPUTS)
 

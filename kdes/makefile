@@ -1,18 +1,28 @@
-OUTPUTS=$(shell echo 00{00..50}.png)
-SWITCHING_DIR=/nas/1101974q/kink-instability-str8/mid-res/without-rampdown/v-4r-4-switching
-ISOTROPIC_DIR=/nas/1101974q/kink-instability-str8/mid-res/without-rampdown/v-4r-4-isotropic
-RADIUS=1.0
+BOTH_OUTPUTS=$(addsuffix .png,$(BOTH_TIMESTEPS))
 
-all: $(OUTPUTS)
+CUBE_LENGTH=1.0
+
+.PHONY: all
+all: $(BOTH_OUTPUTS)
 
 %.png: isotropic-%.txt switching-%.txt
 	python plot-kde.py $@ $^
 
 isotropic-%.txt: $(ISOTROPIC_DIR)/Data/%.sdf
-	python ./print_cylinder.py $< $(RADIUS) > $@
+	python ./print_cube.py $< $(CUBE_LENGTH) > $@
 
 switching-%.txt: $(SWITCHING_DIR)/Data/%.sdf
-	python ./print_cylinder.py $< $(RADIUS) > $@
+	python ./print_cube.py $< $(CUBE_LENGTH) > $@
 
+.PHONY: montage
+montage:
+	for fname in $(OUTPUTS); do \
+		montage \
+			-label 'Cube Length=1.0' radius1/$$fname \
+			-label 'Cube Length=2.0' radius2/$$fname \
+			-geometry 1000x800 montage/$$fname; \
+	done
+
+.PHONY: clean
 clean:
-	rm -f $(OUTPUTS)
+	rm -f $(BOTH_OUTPUTS)
